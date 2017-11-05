@@ -9,24 +9,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rental-mgr-web</artifactId>
+    <version>${project.version}</version>
 
+    <artifactId>rental-mgr-core</artifactId>
 
-    <properties>
-
-
-    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
-        <!--Developpement tools are automatically disabled when running a fully packaged application-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+            <scope>provided</scope>
         </dependency>
+
     </dependencies>
+
+
 
 </project>

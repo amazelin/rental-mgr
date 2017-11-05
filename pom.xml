@@ -8,12 +8,14 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>rental-mgr-web</module>
+
+        <module>rental-mgr-core</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.version>0.0.1-SNAPSHOT</project.version>
     </properties>
 
 
