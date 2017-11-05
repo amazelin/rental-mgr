@@ -1,4 +1,4 @@
-package common.repository;
+package repository;
 
 import javax.persistence.EntityManagerFactory;
 

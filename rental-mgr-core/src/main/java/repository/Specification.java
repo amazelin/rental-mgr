@@ -1,4 +1,4 @@
-package common.repository;
+package repository;
 
 /**
  * Created by Arnaud on 05/02/2017.
