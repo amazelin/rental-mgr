@@ -1,4 +1,4 @@
-package repository;
+package com.nilezam.repository;
 
 import javax.persistence.EntityManagerFactory;
 

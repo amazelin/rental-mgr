@@ -1,4 +1,4 @@
-package repository;
+package com.nilezam.repository;
 
 /**
  * Created by Arnaud on 05/02/2017.
