@@ -1,4 +1,4 @@
-package com.nilezam.repository;
+package com.nilezam.rentalmgr.repository;
 
 /**
  * Created by Arnaud on 05/02/2017.
