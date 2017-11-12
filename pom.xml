@@ -10,6 +10,7 @@
     <modules>
 
         <module>rental-mgr-core</module>
+        <module>rental-mgr-web</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
 
     <build>
         <plugins>
+            <!-- Package as an executable jar -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
