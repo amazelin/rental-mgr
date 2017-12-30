@@ -1,13 +1,20 @@
 package com.nilezam.rentalmgr.config;
 
-import com.nilezam.rentalmgr.web.security.JWTLoginFilter;
+import com.nilezam.rentalmgr.web.security.JWTAuthenticationFilter;
+import com.nilezam.rentalmgr.web.security.JWTAuthorizationFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 /**
  * Created by Arnaud on 26/11/2017.
@@ -17,30 +24,41 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    private final UserDetailsService userDetailsService;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-
-
-        http.csrf().disable().
-            authorizeRequests().
-                antMatchers(HttpMethod.POST, "/users/subscribe").permitAll().
+        http.cors().and().csrf().disable().
+                authorizeRequests().
+                antMatchers(HttpMethod.POST, "/users/sin-up").permitAll().
                 antMatchers(HttpMethod.POST, "users/login").permitAll().
                 anyRequest().authenticated().
-            and().
+                and().
                 //Add login filter verifying user login / password and generating JWT token
-                addFilterBefore(new JWTLoginFilter("/login"), authenticationManager(), UsernamePasswordAuthenticationFilter.class).
-                addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-
-        ;
+                        addFilter(new JWTAuthenticationFilter(authenticationManager())).
+                        addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                //Disables session creation on Spring Security
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    }
 
-        //auth.userDetailsService();
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
     }
 }
