@@ -11,6 +11,7 @@
 
         <module>rental-mgr-core</module>
         <module>rental-mgr-web</module>
+        <module>rental-mgr-front</module>
     </modules>
 
     <properties>
