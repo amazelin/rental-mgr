@@ -9,9 +9,9 @@ import javax.persistence.criteria.Predicate;
 /**
  * Created by Arnaud on 05/02/2017.
  */
-public interface Specification<T> {
+public interface Specification<M, E> {
 
-    boolean isSpecifiedBy(T object);
+    boolean isSpecifiedBy(M object);
 
-    Predicate toPredicate(Root<T> object, CriteriaBuilder criteriaBuilder);
+    Predicate toPredicate(Root<E> object, CriteriaBuilder criteriaBuilder);
 }
