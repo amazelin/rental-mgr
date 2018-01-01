@@ -1,11 +1,13 @@
 package com.nilezam.rentalmgr.model.user;
 
+import com.nilezam.rentalmgr.model.IdentifierBehavior;
+
 import java.util.Objects;
 
 /**
  * Created by Arnaud on 19/11/2017.
  */
-public class User  {
+public class User implements IdentifierBehavior {
 
     private final Long id;
     private final String firstName;
