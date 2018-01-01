@@ -37,9 +37,8 @@ public class UserController {
 
     @RequestMapping(value = "/users/{id}")
     public UserResponse getUser(@PathVariable Long id) {
-        userRepository.find();
 
-
+        return null;
     }
 
 }
