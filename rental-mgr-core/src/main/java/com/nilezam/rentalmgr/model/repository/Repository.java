@@ -3,12 +3,18 @@ package com.nilezam.rentalmgr.model.repository;
 /**
  * Created by Arnaud on 05/02/2017.
  */
-public interface Repository<T> {
+public interface Repository<B> {
 
 
-    T add(T object);
+    B add(B object);
 
-    void remove(T object);
+    void remove(B object);
 
-    Iterable<T> find(HibernateSpecification specification);
+    B get(Long id);
+
+    B get(Specification specification);
+
+    Iterable<B> find(Specification specification);
+
+
 }

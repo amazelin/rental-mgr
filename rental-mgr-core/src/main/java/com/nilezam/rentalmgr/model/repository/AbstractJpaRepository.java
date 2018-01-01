@@ -1,39 +1,47 @@
 package com.nilezam.rentalmgr.model.repository;
 
+import com.nilezam.rentalmgr.model.IdentifierBehavior;
+import com.nilezam.rentalmgr.model.user.User;
 import com.nilezam.rentalmgr.model.user.UserEntity;
-import com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Predicate;
 
 /**
  * Created by Arnaud on 05/02/2017.
  */
-public abstract class AbstractJpaRepository<T> implements Repository<T> {
+public abstract class AbstractJpaRepository<M extends IdentifierBehavior, E extends IdentifierBehavior> implements Repository<M> {
 
+    private final Class<E> entityClass;
+    protected final ModelEntityMapper<M,E> mapper;
     protected final EntityManagerFactory entityManagerFactory;
 
-    public AbstractJpaRepository(EntityManagerFactory entityManagerFactory){
+
+    public AbstractJpaRepository(Class<E> clazz, ModelEntityMapper<M,E> mapper, EntityManagerFactory entityManagerFactory){
+        this.entityClass = clazz;
+        this.mapper = mapper;
         this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
-    public T add(T object) {
-        entityManagerFactory.createEntityManager().persist(object);
-        return object;
+    public M add(M model) {
+        entityManagerFactory.createEntityManager().persist(model);
+        return model;
     }
 
     @Override
-    public void remove(T object) {
-        entityManagerFactory.createEntityManager().remove(object);
+    public void remove(M model) {
+        E entity = entityManagerFactory.createEntityManager().find(entityClass, model.getId());
+
+        if (entity != null)
+            entityManagerFactory.createEntityManager().remove(entity);
+
     }
+
 
     @Override
-    public Iterable<T> find(HibernateSpecification specification) {
-        entityManagerFactory.createEntityManager().getCriteriaBuilder();
-
-        return null;
+    public M get(Long id) {
+        return mapper.toModel(entityManagerFactory.createEntityManager().find(entityClass, id));
     }
+
+
 }
