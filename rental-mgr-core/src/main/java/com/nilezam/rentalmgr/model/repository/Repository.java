@@ -10,5 +10,5 @@ public interface Repository<T> {
 
     void remove(T object);
 
-    Iterable<T> find(Specification specification);
+    Iterable<T> find(HibernateSpecification specification);
 }
