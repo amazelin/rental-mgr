@@ -1,5 +1,7 @@
 package com.nilezam.rentalmgr.model.user;
 
+import com.nilezam.rentalmgr.model.IdentifierBehavior;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,7 +10,7 @@ import javax.persistence.Id;
  * Created by Arnaud on 19/11/2017.
  */
 @Entity
-public class UserEntity {
+public class UserEntity implements IdentifierBehavior {
 
     @Id
     @GeneratedValue
@@ -18,11 +20,22 @@ public class UserEntity {
 
     private String lastName;
 
+    private String mail;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     private String password;
 
     UserEntity() {
     }
 
+    @Override
     public Long getId() {
         return id;
     }
@@ -49,5 +62,24 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public enum Columns {
+        ID("id"),
+        FIRSTNAME("firstName"),
+        LASTNAME("lastName"),
+        MAIL("mail"),
+        PASSWORD("password");
+
+        private final String label;
+
+        Columns(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 }
