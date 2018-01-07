@@ -5,11 +5,11 @@ import com.nilezam.rentalmgr.model.repository.Specification;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,11 +17,12 @@ import java.util.Set;
  * Created by Arnaud on 19/11/2017.
  */
 @Repository
+@Transactional
 public class UserRepository extends AbstractJpaRepository<User, UserEntity>  {
 
 
-    public UserRepository(EntityManagerFactory entityManagerFactory) {
-        super(UserEntity.class, new UserMapper(), entityManagerFactory);
+    public UserRepository(EntityManager entityManager) {
+        super(UserEntity.class, new UserMapper(), entityManager);
     }
 
 
@@ -41,14 +42,13 @@ public class UserRepository extends AbstractJpaRepository<User, UserEntity>  {
     }
 
     private TypedQuery<UserEntity> getTypedQuery(Specification specification) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query = criteriaBuilder
                 .createQuery(UserEntity.class);
         final Root<UserEntity> from = query.from(UserEntity.class);
         query.select(from).where(specification.toPredicate(from, criteriaBuilder));
 
-        return entityManager.createQuery(query);
+        return em.createQuery(query);
 
     }
 }
