@@ -13,7 +13,13 @@ public class UserMapper implements ModelEntityMapper<User, UserEntity> {
 
     @Override
     public UserEntity toEntity(User from) {
-        return null;
+        UserEntity userEntity = new UserEntity();
+        userEntity.setFirstName(from.getFirstName());
+        userEntity.setLastName(from.getLastName());
+        userEntity.setMail(from.getMail());
+        userEntity.setPassword(from.getPassword());
+
+        return userEntity;
     }
 }
 
