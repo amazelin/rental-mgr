@@ -2,25 +2,28 @@ package com.nilezam.rentalmgr.model.user;
 
 import com.nilezam.rentalmgr.model.IdentifierBehavior;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Arnaud on 19/11/2017.
  */
 @Entity
+@Table(name = "user")
 public class UserEntity implements IdentifierBehavior {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
 
     private String firstName;
 
     private String lastName;
 
     private String mail;
+
+    UserEntity() {
+    }
 
     public String getMail() {
         return mail;
@@ -32,12 +35,13 @@ public class UserEntity implements IdentifierBehavior {
 
     private String password;
 
-    UserEntity() {
-    }
-
     @Override
     public Long getId() {
         return id;
+    }
+
+    private void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
