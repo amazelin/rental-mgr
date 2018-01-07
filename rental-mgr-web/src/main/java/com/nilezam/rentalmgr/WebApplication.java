@@ -2,6 +2,7 @@ package com.nilezam.rentalmgr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 /**
  * Created by Arnaud on 05/02/2017.
@@ -11,9 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication //equivalent to using combination of @Configuration, @EnableAutoConfiguration and @ComponentScan!
-public class Application {
+@Import(CoreApplication.class)
+public class WebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(WebApplication.class, args);
     }
 }
