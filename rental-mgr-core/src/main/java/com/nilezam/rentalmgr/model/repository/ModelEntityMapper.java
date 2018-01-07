@@ -1,9 +1,9 @@
 package com.nilezam.rentalmgr.model.repository;
 
-public interface ModelEntityMapper<M,E> {
+public interface ModelEntityMapper<Model, Entity> {
 
-    M toModel(E from);
+    Model toModel(Entity from);
 
-    E toEntity(M from);
+    Entity toEntity(Model from);
 
 }
