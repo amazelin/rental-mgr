@@ -57,10 +57,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /**
      * Override default successfulAuthentication method in order to add JWT in response header
      *
-     * @param request
-     * @param response
-     * @param chain
-     * @param authResult
+     * @param request Http request
+     * @param response Http response
+     * @param chain FilterChain
+     * @param authResult Authentication
      * @throws IOException
      * @throws ServletException
      */
@@ -69,7 +69,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             chain, Authentication authResult) throws IOException, ServletException {
 
         String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername()).setExpiration(new Date
-                (System.currentTimeMillis() + JWTConstants.TOKEN_EXPIRATION_TIME)).signWith(SignatureAlgorithm.ES256,
+                (System.currentTimeMillis() + JWTConstants.TOKEN_EXPIRATION_TIME)).signWith(SignatureAlgorithm.HS512,
                 JWTConstants.SECRET.getBytes()).compact();
 
         response.addHeader(JWTConstants.AUTHORIZATION_HEADER, JWTConstants.TOKEN_PREFIX + token);
