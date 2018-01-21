@@ -28,13 +28,15 @@ public abstract class AbstractJpaRepository<Model extends IdentifierBehavior, En
     }
 
     @Override
+    @Transactional
     public Model add(Model model) {
-        em.persist(mapper.toEntity(model));
-        em.flush();
-        return model;
+        Entity entity = mapper.toEntity(model);
+        em.persist(entity);
+        return mapper.toModel(entity);
     }
 
     @Override
+    @Transactional
     public void remove(Model model) {
         Entity entity = em.find(entityClass, model.getId());
 
