@@ -27,9 +27,9 @@ public class UserController {
         final User user = userRepository.add(new User(null, signUpInput.getFirstName(), signUpInput.getLastName(), signUpInput.getMail(), passwordEncoder.encode(signUpInput.getPassword())));
 
         UserResponse userResponse = new UserResponse(user.getId());
-        userResponse.setFirstName(userResponse.getFirstName());
-        userResponse.setLastName(userResponse.getLastName());
-        userResponse.setMail(userResponse.getMail());
+        userResponse.setFirstName(user.getFirstName());
+        userResponse.setLastName(user.getLastName());
+        userResponse.setMail(user.getMail());
 
         return userResponse;
     }
@@ -38,7 +38,13 @@ public class UserController {
     @RequestMapping(value = "/users/{id}")
     public UserResponse getUser(@PathVariable Long id) {
 
-        return null;
+        final User user = userRepository.get(id);
+        UserResponse userResponse = new UserResponse(user.getId());
+        userResponse.setFirstName(user.getFirstName());
+        userResponse.setLastName(user.getLastName());
+        userResponse.setMail(user.getMail());
+
+        return userResponse;
     }
 
 }
