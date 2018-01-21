@@ -10,6 +10,8 @@ public class AuthenticationCredentials {
     private String login;
     private String password;
 
+    public AuthenticationCredentials() {
+    }
 
     public AuthenticationCredentials(String login, String password) {
         this.login = login;
