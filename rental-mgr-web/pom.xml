@@ -24,9 +24,20 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <!-- JSON Web Token support -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+        <!-- Spring dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--Developpement tools are automatically disabled when running a fully packaged application-->
         <dependency>
@@ -34,6 +45,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- End of Spring dependencies -->
     </dependencies>
 
 

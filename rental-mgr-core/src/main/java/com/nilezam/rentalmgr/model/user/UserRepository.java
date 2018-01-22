@@ -2,43 +2,53 @@ package com.nilezam.rentalmgr.model.user;
 
 import com.nilezam.rentalmgr.model.repository.AbstractJpaRepository;
 import com.nilezam.rentalmgr.model.repository.Specification;
-import com.nilezam.rentalmgr.model.repository.Repository;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Arnaud on 19/11/2017.
  */
-@org.springframework.stereotype.Repository
-public class UserRepository extends AbstractJpaRepository implements Repository<User> {
+@Repository
+@Transactional
+public class UserRepository extends AbstractJpaRepository<User, UserEntity>  {
 
 
-    public UserRepository(EntityManagerFactory entityManagerFactory) {
-        super(entityManagerFactory);
+    public UserRepository(EntityManager entityManager) {
+        super(UserEntity.class, new UserMapper(), entityManager);
     }
 
-    @Override
-    public User add(User user) {
-
-        UserEntity userEntity = new UserEntity();
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setPassword(user.getPassword());
-
-        entityManagerFactory.createEntityManager().persist(userEntity);
-
-        user = new User(userEntity.getId(), userEntity.getFirstName(), userEntity.getLastName(), userEntity.getLastName(), userEntity.getPassword());
-
-        return user;
-    }
 
     @Override
-    public void remove(User object) {
-
+    public User get(Specification specification) {
+        return mapper.toModel(getTypedQuery(specification).getSingleResult());
     }
 
     @Override
     public Iterable<User> find(Specification specification) {
-        return null;
+        Set<User> users = new HashSet<>();
+
+        for (UserEntity userEntity : getTypedQuery(specification).getResultList())
+            users.add(mapper.toModel(userEntity));
+
+        return users;
+    }
+
+    private TypedQuery<UserEntity> getTypedQuery(Specification specification) {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> query = criteriaBuilder
+                .createQuery(UserEntity.class);
+        final Root<UserEntity> from = query.from(UserEntity.class);
+        query.select(from).where(specification.toPredicate(from, criteriaBuilder));
+
+        return em.createQuery(query);
+
     }
 }
