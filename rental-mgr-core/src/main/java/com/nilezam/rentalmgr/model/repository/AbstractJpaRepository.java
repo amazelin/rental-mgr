@@ -48,7 +48,12 @@ public abstract class AbstractJpaRepository<Model extends IdentifierBehavior, En
 
     @Override
     public Model get(Long id) {
-        return mapper.toModel(em.find(entityClass, id));
+        final Entity entity = em.find(entityClass, id);
+        if (entity != null) {
+            return mapper.toModel(entity);
+        }
+
+        return null;
     }
 
     @Override
