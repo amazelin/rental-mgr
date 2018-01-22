@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().
                 authorizeRequests().
                 antMatchers(HttpMethod.POST, "/users/sign-up").permitAll().
-                antMatchers(HttpMethod.POST, "users/login").permitAll().
+                antMatchers(HttpMethod.POST, "/login").permitAll().
                 anyRequest().authenticated().
                 and().
                 //Add login filter verifying user login / password and generating JWT token
