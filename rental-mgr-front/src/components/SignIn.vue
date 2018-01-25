@@ -3,17 +3,25 @@
     <form class="form-signin">
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.login" required autofocus>
+      <label for="inputPassword" class="sr-only" v-model="user.password" required>Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="passwordCheck" required>
       <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
         <router-link to="/subscribe">Subscribe</router-link>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" v-on:click="submit">Sign in</button>
     </form>
+    <p>
+        id: {{user.id}}
+        firstName: {{user.firstName}}
+        lastName : {{user.lastName}}
+
+
+
+    </p>
   </div>
 </template>
 
@@ -21,8 +29,24 @@
 export default {
   data() {
     return {
-         }
+      signIn: {
+        login: '',
+        password: '',
+        passwordCheck: ''
+      },
+      user: ''
+    }
   },
+  methods:{
+    submit(){
+        var resource = this.$resource('http://localhost:8081/login');
+        resource.save(signIn).then(response => {
+          this.user = response.body;
+        }, response => {
+          this.callBackStatus = 'error';
+        });
+    }
+  }
 }
 </script>
 
