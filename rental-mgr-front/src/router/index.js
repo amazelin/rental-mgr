@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+Vue.use(Router)
+
 
 import Signin from '../components/SignIn.vue'
 import Subscribe from '../components/Subscribe.vue'
+import Home from '../components/Home.vue'
 
-Vue.use(Router)
 
 export default new Router({
   mode: 'history',
@@ -23,6 +25,11 @@ export default new Router({
       path: '/subscribe',
       component: Subscribe,
       name: 'subscribe'
+    },
+    {
+      path: '/home',
+      component: Home,
+      name: 'home'
     },
     {
       path: '*',
