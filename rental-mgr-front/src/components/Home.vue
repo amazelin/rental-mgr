@@ -13,7 +13,7 @@
             <a class="nav-link" href="#"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link disabled" href="#">Disabled {{user.login}}</a>
           </li>
         </ul>
       </div>
@@ -21,6 +21,15 @@
 </template>
 
 <script>
+
+export default {
+  data() {
+    return {
+      user: this.$store.getters.user
+    }
+  },
+
+}
 </script>
 
 <style>

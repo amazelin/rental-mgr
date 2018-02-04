@@ -6,11 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
   state: {
-    isLoggedIn: !!localStorage.getItem("token")
+    isLoggedIn: !!localStorage.getItem("token"),
+    user: { login:"toto", password: '456'}
   },
+
   mutations: {
-    LOGIN (state) {
+    LOGIN (state, user) {
       state.pending = true
+      state.user = user
     },
     LOGIN_SUCCESS (state) {
       state.isLoggedIn = true
@@ -18,13 +21,15 @@ export default new Vuex.Store({
     },
     LOGOUT (state) {
       state.isLoggedIn = false
+      state.user = {}
     }
   },
   getters: {
-    logged: (state) => state.isLoggedIn
+    logged: (state) => state.isLoggedIn,
+    user: (state) => state.user
   },
   actions: {
-    login({commit}) {
+    login({commit}, user) {
       commit(LOGIN)
       return new Promise(resolve => {
         setTimeOut(() => {

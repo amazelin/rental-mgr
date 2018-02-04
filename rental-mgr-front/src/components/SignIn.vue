@@ -1,10 +1,9 @@
 <template>
   <div class="container">
-      <img src="../assets/logo.png">
       <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.id" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.login" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" v-model="user.password" placeholder="Password" required>
         <div class="checkbox mb-3">
@@ -12,7 +11,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" v-on:click.prevent="submit">Sign in</button>
         <router-link to="/subscribe">Subscribe</router-link>
         <router-link to="/home">Home</router-link>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
@@ -29,43 +28,28 @@
 export default {
   data() {
     return {
-      user: {
-        id:'',
-        login:'',
-        passsword: ''
-      }
+      user: { login:'john@doe.com', password:123 }
     }
   },
   methods:{
-    submit(){
-        var resource = this.$resource('http://localhost:8081/login');
-        resource.save(signIn).then(response => {
-          this.user = response.body;
-        }, response => {
-          this.callBackStatus = 'error';
-        });
+//    submit(){
+//        var resource = this.$resource('http://localhost:8081/login');
+//        resource.save(signIn).then(response => {
+//          this.user = response.body;
+//        }, response => {
+//          this.callBackStatus = 'error';
+//        });
+    submit: function(event){
+    console.log(this.user)
+      this.$store.commit('LOGIN', this.user)
+      this.$router.push('home')
+
     }
   }
 }
 </script>
 
 <style>
-
- body {
-   display: -ms-flexbox;
-   display: -webkit-box;
-   display: flex;
-   -ms-flex-align: center;
-   -ms-flex-pack: center;
-   -webkit-box-align: center;
-   align-items: center;
-   -webkit-box-pack: center;
-   justify-content: center;
-   padding-top: 40px;
-   padding-bottom: 40px;
-   background-color: #f5f5f5;
- }
-
  .form-signin {
    width: 100%;
    max-width: 330px;
