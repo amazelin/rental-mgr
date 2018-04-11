@@ -32,21 +32,6 @@ public class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().
-                authorizeRequests().
-                antMatchers(HttpMethod.POST, "/users/sign-up").permitAll().
-                antMatchers(HttpMethod.POST, "/login").permitAll().
-                anyRequest().authenticated().
-                and().
-                //Add login filter verifying user login / password and generating JWT token
-                        addFilter(new JWTAuthenticationFilter(authenticationManager())).
-                        addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                //Disables session creation on Spring Security
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    }
-
-    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
