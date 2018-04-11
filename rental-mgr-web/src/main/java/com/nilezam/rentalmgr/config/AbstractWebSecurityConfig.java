@@ -4,6 +4,7 @@ import com.nilezam.rentalmgr.web.security.JWTAuthenticationFilter;
 import com.nilezam.rentalmgr.web.security.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,15 +20,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 /**
  * Created by Arnaud on 26/11/2017.
  */
-@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class AbstractWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
+    public AbstractWebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -45,8 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 //Disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-
     }
 
     @Override
