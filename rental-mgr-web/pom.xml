@@ -8,13 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>rental-mgr-web</artifactId>
-
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-
-
     </properties>
 
     <dependencies>
@@ -63,7 +60,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <id>copy Vue.js frontend content</id>
