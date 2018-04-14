@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Arnaud on 19/11/2017.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
 public class UserEntity implements IdentifierBehavior {
 
     @Id
