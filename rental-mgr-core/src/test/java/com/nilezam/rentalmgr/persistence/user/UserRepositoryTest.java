@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -38,11 +40,11 @@ public class UserRepositoryTest {
 
 
         //when
-       final User userResult = userRepository.get(new UserSpecification.MailEqual(testMail));
+       final Optional<User> userResult = userRepository.get(new UserSpecification.MailEqual(testMail));
 
         //then
-        assertEquals(userResult.getLastName(), "Doe");
-        assertNotNull(userResult.getId());
+        assertEquals(userResult.map(User::getLastName).get(), "Doe");
+        assertNotNull(userResult.map(User::getId).get());
     }
 
 }

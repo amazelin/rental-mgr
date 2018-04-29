@@ -1,5 +1,7 @@
 package com.nilezam.rentalmgr.persistence.repository;
 
+import java.util.Optional;
+
 /**
  * Created by Arnaud on 05/02/2017.
  */
@@ -10,9 +12,9 @@ public interface Repository<Model> {
 
     void remove(Model object);
 
-    Model get(Long id);
+    Optional<Model> get(Long id);
 
-    Model get(Specification specification);
+    Optional<Model> get(Specification specification);
 
     Iterable<Model> find(Specification specification);
 

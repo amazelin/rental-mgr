@@ -11,7 +11,9 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
@@ -33,8 +35,8 @@ public abstract class AbstractJpaRepository<Model extends IdentifierBehavior, En
     }
 
     @Override
-    public Model get(Specification specification) {
-        return mapper.toModel(getTypedQuery(specification).getSingleResult());
+    public Optional<Model> get(Specification specification) {
+        return Optional.ofNullable(mapper.toModel(getTypedQuery(specification).getSingleResult()));
     }
 
     @Override
@@ -64,22 +66,13 @@ public abstract class AbstractJpaRepository<Model extends IdentifierBehavior, En
     @Override
     @Transactional
     public void remove(Model model) {
-        Entity entity = em.find(entityClass, model.getId());
-
-        if (entity != null)
-            em.remove(entity);
-
+        Optional.ofNullable(em.find(entityClass, model.getId())).ifPresent(em::remove);
     }
 
 
     @Override
-    public Model get(Long id) {
-        final Entity entity = em.find(entityClass, id);
-        if (entity != null) {
-            return mapper.toModel(entity);
-        }
-
-        return null;
+    public Optional<Model> get(Long id) {
+        return Optional.ofNullable(em.find(entityClass, id)).map(mapper::toModel);
     }
 
     @Override
