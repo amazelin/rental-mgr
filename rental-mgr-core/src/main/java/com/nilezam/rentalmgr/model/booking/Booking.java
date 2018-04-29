@@ -2,47 +2,47 @@ package com.nilezam.rentalmgr.model.booking;
 
 import com.nilezam.rentalmgr.model.booking.status.Status;
 import com.nilezam.rentalmgr.model.user.User;
+import com.nilezam.rentalmgr.persistence.IdentifierBehavior;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Booking {
+public class Booking implements IdentifierBehavior {
 
-    private final Long id;
-    private final LocalDateTime creationDate;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private final User owner;
+
+    private Long id;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final User user;
     private Status status;
+    private int peopleCount;
 
-    public Booking(BookingBuilder bookingBuilder) {
-        id = bookingBuilder.id;
-        creationDate = LocalDateTime.now();
-        startDate = bookingBuilder.startDate;
-        endDate = bookingBuilder.endDate;
-        owner = bookingBuilder.owner;
-        status = bookingBuilder.status;
+
+    private final LocalDateTime createDate;
+
+    private Booking(BookingBuilder builder) {
+        this.startDate = builder.startDate;
+        this.endDate = builder.endDate;
+        this.user = builder.user;
+        this.createDate = builder.createDate;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getStartDate() {
         return startDate;
     }
 
+
     public LocalDate getEndDate() {
         return endDate;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
     public Status getStatus() {
@@ -53,27 +53,27 @@ public class Booking {
         this.status = status;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return Objects.equals(startDate, booking.startDate) &&
-                Objects.equals(endDate, booking.endDate);
+    public int getPeopleCount() {
+        return peopleCount;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(startDate, endDate);
+    public void setPeopleCount(int peopleCount) {
+        this.peopleCount = peopleCount;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
     public static class BookingBuilder {
         private Long id;
         private LocalDate startDate;
         private LocalDate endDate;
-        private User owner;
+        private LocalDateTime createDate;
+        private User user;
         private Status status;
+        private int peopleCount;
+
 
         public BookingBuilder id(Long id) {
             this.id = id;
@@ -90,8 +90,8 @@ public class Booking {
             return this;
         }
 
-        public BookingBuilder owner(User owner) {
-            this.owner = owner;
+        public BookingBuilder user(User user) {
+            this.user = user;
             return this;
         }
 
@@ -100,8 +100,40 @@ public class Booking {
             return this;
         }
 
+        public BookingBuilder peopleCount(int peopleCount) {
+            this.peopleCount = peopleCount;
+            return this;
+        }
+
+        public BookingBuilder createDate(LocalDateTime createDate) {
+            this.createDate = createDate;
+            return this;
+        }
+
         public Booking build() {
             return new Booking(this);
         }
+
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return Objects.equals(startDate, booking.startDate) &&
+                Objects.equals(endDate, booking.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(startDate, endDate);
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 }

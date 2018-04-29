@@ -1,7 +1,7 @@
 package com.nilezam.rentalmgr.web.user;
 
 import com.nilezam.rentalmgr.model.user.User;
-import com.nilezam.rentalmgr.model.user.UserRepository;
+import com.nilezam.rentalmgr.persistence.user.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

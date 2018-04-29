@@ -1,4 +1,6 @@
-package com.nilezam.rentalmgr.model.booking.status;
+package com.nilezam.rentalmgr.persistence.booking;
+
+import com.nilezam.rentalmgr.model.booking.status.StatusCode;
 
 import javax.persistence.*;
 @Entity

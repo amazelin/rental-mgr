@@ -1,9 +1,8 @@
-package com.nilezam.rentalmgr.model.booking;
+package com.nilezam.rentalmgr.persistence.booking;
 
 
-import com.nilezam.rentalmgr.model.IdentifierBehavior;
-import com.nilezam.rentalmgr.model.booking.status.StatusEntity;
-import com.nilezam.rentalmgr.model.user.UserEntity;
+import com.nilezam.rentalmgr.persistence.IdentifierBehavior;
+import com.nilezam.rentalmgr.persistence.user.UserEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;

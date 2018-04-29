@@ -1,6 +1,6 @@
-package com.nilezam.rentalmgr.model.user;
+package com.nilezam.rentalmgr.persistence.user;
 
-import com.nilezam.rentalmgr.model.IdentifierBehavior;
+import com.nilezam.rentalmgr.persistence.IdentifierBehavior;
 
 import javax.persistence.*;
 
@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Arnaud on 19/11/2017.
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class UserEntity implements IdentifierBehavior {
 
     @Id
@@ -22,7 +22,7 @@ public class UserEntity implements IdentifierBehavior {
 
     private String mail;
 
-    UserEntity() {
+    public UserEntity() {
     }
 
     public String getMail() {

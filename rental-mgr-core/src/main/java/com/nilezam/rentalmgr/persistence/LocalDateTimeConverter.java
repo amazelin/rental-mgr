@@ -1,4 +1,4 @@
-package com.nilezam.rentalmgr.model;
+package com.nilezam.rentalmgr.persistence;
 
 import javax.persistence.AttributeConverter;
 import java.sql.Timestamp;

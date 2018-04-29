@@ -1,5 +1,6 @@
 package com.nilezam.rentalmgr.model.user;
 
+import com.nilezam.rentalmgr.persistence.user.UserSpecification;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;

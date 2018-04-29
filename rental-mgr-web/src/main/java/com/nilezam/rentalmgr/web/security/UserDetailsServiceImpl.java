@@ -1,8 +1,8 @@
 package com.nilezam.rentalmgr.web.security;
 
 import com.nilezam.rentalmgr.model.user.User;
-import com.nilezam.rentalmgr.model.user.UserRepository;
-import com.nilezam.rentalmgr.model.user.UserSpecification;
+import com.nilezam.rentalmgr.persistence.user.UserRepository;
+import com.nilezam.rentalmgr.persistence.user.UserSpecification;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

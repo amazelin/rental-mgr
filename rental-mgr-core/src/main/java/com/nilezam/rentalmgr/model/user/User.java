@@ -1,6 +1,6 @@
 package com.nilezam.rentalmgr.model.user;
 
-import com.nilezam.rentalmgr.model.IdentifierBehavior;
+import com.nilezam.rentalmgr.persistence.IdentifierBehavior;
 
 import java.util.Objects;
 

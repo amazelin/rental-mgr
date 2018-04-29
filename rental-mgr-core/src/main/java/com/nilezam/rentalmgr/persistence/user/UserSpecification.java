@@ -1,11 +1,12 @@
-package com.nilezam.rentalmgr.model.user;
+package com.nilezam.rentalmgr.persistence.user;
 
-import com.nilezam.rentalmgr.model.repository.Specification;
+import com.nilezam.rentalmgr.model.user.User;
+import com.nilezam.rentalmgr.persistence.repository.Specification;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 public class UserSpecification {
 

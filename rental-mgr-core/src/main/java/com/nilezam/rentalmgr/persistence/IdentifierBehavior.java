@@ -1,4 +1,4 @@
-package com.nilezam.rentalmgr.model;
+package com.nilezam.rentalmgr.persistence;
 
 public interface IdentifierBehavior {
 

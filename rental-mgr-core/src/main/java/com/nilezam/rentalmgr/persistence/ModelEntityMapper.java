@@ -1,4 +1,4 @@
-package com.nilezam.rentalmgr.model.repository;
+package com.nilezam.rentalmgr.persistence;
 
 public interface ModelEntityMapper<Model, Entity> {
 

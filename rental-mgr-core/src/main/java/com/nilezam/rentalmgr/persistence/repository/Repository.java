@@ -1,4 +1,4 @@
-package com.nilezam.rentalmgr.model.repository;
+package com.nilezam.rentalmgr.persistence.repository;
 
 /**
  * Created by Arnaud on 05/02/2017.
