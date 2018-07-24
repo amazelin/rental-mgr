@@ -4,7 +4,7 @@ Vue.use(Router)
 
 
 import Signin from '../components/SignIn.vue'
-import Subscribe from '../components/Subscribe.vue'
+import Signup from '../components/SignUp.vue'
 import Home from '../components/Home.vue'
 
 
@@ -22,9 +22,9 @@ export default new Router({
       name: 'signin'
     },
     {
-      path: '/subscribe',
-      component: Subscribe,
-      name: 'subscribe'
+      path: '/sign-up',
+      component: Signup,
+      name: 'signup'
     },
     {
       path: '/home',

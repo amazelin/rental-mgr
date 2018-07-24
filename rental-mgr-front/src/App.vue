@@ -6,14 +6,14 @@
 
 <script>
 
-  import subscribe from './components/Subscribe.vue'
+  import signup from './components/SignUp.vue'
   import signin from './components/SignIn.vue'
   import home from './components/Home.vue'
 
   export default {
     name: 'app',
     components:{
-      subscribe,signin,home
+      signup,signin,home
     }
   }
 </script>

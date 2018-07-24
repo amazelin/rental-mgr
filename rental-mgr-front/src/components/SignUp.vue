@@ -42,7 +42,7 @@ export default {
   methods:{
     submit() {
       this.isValidatedForm = true;
-      var resource = this.$resource('http://localhost:8081/users/subscribe');
+      var resource = this.$resource('http://localhost:8081/users/sign-up');
       resource.save(this.user).then(response => {
         //success callback
         this.callBackStatus = 'success';

@@ -12,7 +12,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" v-on:click.prevent="submit">Sign in</button>
-        <router-link to="/subscribe">Subscribe</router-link>
+        <router-link to="/sign-up">Sign-up</router-link>
         <router-link to="/home">Home</router-link>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
       </form>
@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      user: { login:'john@doe.com', password:123 }
+      user: { login:'mazelin.arnaud@gmail.com', password:123 }
     }
   },
   methods:{
