@@ -7,17 +7,16 @@ export default new Vuex.Store({
 
   state: {
     isLoggedIn: !!localStorage.getItem("token"),
-    user: { login:"toto", password: '456'}
+    user: {}
   },
 
   mutations: {
     LOGIN (state, user) {
-      state.pending = true
       state.user = user
+      state.isLoggedIn = true
     },
     LOGIN_SUCCESS (state) {
       state.isLoggedIn = true
-      state.pending = false
     },
     LOGOUT (state) {
       state.isLoggedIn = false

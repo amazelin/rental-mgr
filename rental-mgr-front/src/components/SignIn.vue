@@ -11,7 +11,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" v-on:click.prevent="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" v-on:click.prevent="signin">Sign in</button>
         <router-link to="/sign-up">Sign-up</router-link>
         <router-link to="/home">Home</router-link>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
@@ -32,18 +32,16 @@ export default {
     }
   },
   methods:{
-//    submit(){
-//        var resource = this.$resource('http://localhost:8081/login');
-//        resource.save(signIn).then(response => {
-//          this.user = response.body;
-//        }, response => {
-//          this.callBackStatus = 'error';
-//        });
-    submit: function(event){
-    console.log(this.user)
-      this.$store.commit('LOGIN', this.user)
-      this.$router.push('home')
 
+    signin: function(event){
+      this.$http.post('http://localhost:8081/login', this.user).then(response => {
+         this.user.token = response.headers.get('authorization');
+         this.$http.headers.common['Authorization'] = this.user.token;
+         this.$store.commit('LOGIN', this.user)
+         this.$router.push('home')
+       }, response => {
+         // error callback
+       });
     }
   }
 }
