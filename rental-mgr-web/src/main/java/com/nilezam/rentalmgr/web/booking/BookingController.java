@@ -28,7 +28,6 @@ public class BookingController {
 
     @RequestMapping(value="/bookings/{bookingId}")
     public ResponseEntity<Booking> getBookings(@PathVariable Long bookingId) {
-
         return bookingRepository.get(bookingId)
                 .map(booking -> new ResponseEntity<>(booking, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
