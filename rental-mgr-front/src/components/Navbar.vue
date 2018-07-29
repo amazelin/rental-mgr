@@ -16,7 +16,7 @@
           <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.firstName}}</a>
           <div class="dropdown-menu" aria-labelledby="dropdown04">
             <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="#">Logout</a>
+            <button class="dropdown-item" v-on:click.prevent="logout">Logout</button>
           </div>
         </li>
       </ul>
@@ -39,6 +39,13 @@ export default {
     }, response => {
      // error callback
     });
+  },
+  methods: {
+    logout(){
+      this.$store.commit('LOGOUT');
+      this.$router.push('index');
+    }
+
   }
 }
 </script>
