@@ -16,10 +16,6 @@
         <router-link to="/home">Home</router-link>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
       </form>
-    <p>
-        login: {{user.login}}
-        password : {{user.password}}
-    </p>
   </div>
 </template>
 
@@ -32,10 +28,10 @@ export default {
     }
   },
   methods:{
-
     signin: function(event){
       this.$http.post('http://localhost:8081/login', this.user).then(response => {
-         this.user.token = response.headers.get('authorization');
+         this.user.token = response.headers.get('Authorization');
+         this.user.id = response.headers.get('X-user-id');
          this.$http.headers.common['Authorization'] = this.user.token;
          this.$store.commit('LOGIN', this.user)
          this.$router.push('home')
