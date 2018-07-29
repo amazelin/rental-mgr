@@ -26,7 +26,7 @@ public class BookingEntity implements IdentifierBehavior {
     @Column(name = "END_DATE")
     private LocalDate endDate;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "OWNER_ID", nullable = false)
     private UserEntity owner;
 

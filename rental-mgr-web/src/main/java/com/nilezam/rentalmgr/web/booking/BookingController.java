@@ -3,6 +3,7 @@ package com.nilezam.rentalmgr.web.booking;
 
 import com.nilezam.rentalmgr.model.booking.Booking;
 import com.nilezam.rentalmgr.persistence.booking.BookingRepository;
+import com.nilezam.rentalmgr.persistence.booking.BookingSpecification;
 import com.nilezam.rentalmgr.persistence.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 @Controller
 public class BookingController {
@@ -25,6 +28,13 @@ public class BookingController {
         this.userRepository = userRepository;
     }
 
+    @RequestMapping(value="/users/{userId}/bookings")
+    public ResponseEntity<Iterable<Booking>> getUserBookings(@PathVariable Long userId) {
+        final Iterable<Booking> bookings = bookingRepository.find(new BookingSpecification.UserEquals(userId));
+
+        return new ResponseEntity<>(bookings, HttpStatus.OK);
+
+    }
 
     @RequestMapping(value="/bookings/{bookingId}")
     public ResponseEntity<Booking> getBookings(@PathVariable Long bookingId) {

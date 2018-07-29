@@ -24,6 +24,14 @@ public class User implements IdentifierBehavior {
         this.password = password;
     }
 
+    public User(Builder builder) {
+        this.id = builder.id;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.mail = builder.mail;
+        this.password = builder.password;
+    }
+
     public Long getId() {
         return id;
     }
@@ -56,5 +64,43 @@ public class User implements IdentifierBehavior {
     @Override
     public int hashCode() {
         return Objects.hash(mail);
+    }
+    
+    public static class Builder {
+        private Long id;
+        private String firstName;
+        private String lastName;
+        private String mail;
+        private String password;
+
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder mail(String mail) {
+            this.mail = mail;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }

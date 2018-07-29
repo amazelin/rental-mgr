@@ -1,5 +1,6 @@
-package com.nilezam.rentalmgr.model.user;
+package com.nilezam.rentalmgr.persistence.user;
 
+import com.nilezam.rentalmgr.model.user.User;
 import com.nilezam.rentalmgr.persistence.user.UserSpecification;
 import org.junit.Test;
 import org.junit.runner.RunWith;

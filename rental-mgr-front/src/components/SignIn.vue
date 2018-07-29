@@ -3,9 +3,9 @@
       <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="user.login" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="loginForm.login" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" v-model="user.password" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" v-model="loginForm.password" placeholder="Password" required>
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
@@ -24,16 +24,16 @@
 export default {
   data() {
     return {
-      user: { login:'mazelin.arnaud@gmail.com', password:123 }
+      loginForm: { login:'mazelin.arnaud@gmail.com', password:123 }
     }
   },
   methods:{
     signin: function(event){
-      this.$http.post('http://localhost:8081/login', this.user).then(response => {
-         this.user.token = response.headers.get('Authorization');
-         this.user.id = response.headers.get('X-user-id');
-         this.$http.headers.common['Authorization'] = this.user.token;
-         this.$store.commit('LOGIN', this.user)
+      this.$http.post('http://localhost:8081/login', {login: this.loginForm.login, password: this.loginForm.password}).then(response => {
+         var user = this.loginForm;
+         user.token = response.headers.get('Authorization');
+         user.id = response.headers.get('X-user-id');
+         this.$store.commit('LOGIN', user)
          this.$router.push('home')
        }, response => {
          // error callback

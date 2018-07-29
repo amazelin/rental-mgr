@@ -22,10 +22,12 @@ public class Booking implements IdentifierBehavior {
     private final LocalDateTime createDate;
 
     private Booking(BookingBuilder builder) {
+        this.id = builder.id;
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
         this.user = builder.user;
         this.createDate = builder.createDate;
+        this.status = builder.status;
     }
 
     public void setId(Long id) {

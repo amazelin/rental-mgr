@@ -9,10 +9,10 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public class BookingRepository  extends AbstractJpaRepository<Booking , BookingEntity> {
+public class BookingRepository extends AbstractJpaRepository<Booking , BookingEntity> {
 
 
     public BookingRepository(EntityManager entityManager) {
-        super(BookingEntity.class, null, entityManager);
+        super(BookingEntity.class, new BookingMapper(), entityManager);
     }
 }

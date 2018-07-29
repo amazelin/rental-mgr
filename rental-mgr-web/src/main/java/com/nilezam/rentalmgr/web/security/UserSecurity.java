@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
-public class UserSecurity extends User {
+    class UserSecurity extends User {
 
     private Long id;
 
