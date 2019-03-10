@@ -5,7 +5,7 @@ Vue.use(Router)
 
 import Signin from '../components/SignIn.vue'
 import Signup from '../components/SignUp.vue'
-import Home from '../components/Home.vue'
+import Home from '../components/user/Home.vue'
 
 
 export default new Router({

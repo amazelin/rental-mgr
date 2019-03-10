@@ -8,7 +8,7 @@
 
   import signup from './components/SignUp.vue'
   import signin from './components/SignIn.vue'
-  import home from './components/Home.vue'
+  import home from './components/user/Home.vue'
 
   export default {
     name: 'app',
